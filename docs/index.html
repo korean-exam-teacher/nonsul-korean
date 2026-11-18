@@ -316,6 +316,12 @@ footer .guide details{border-color:var(--line)!important;background:none!importa
 .logo .crumb a.here{font-size:21px;opacity:1}
 @media (max-width:480px){.crumb{gap:6px}.logo .crumb a{font-size:13.5px}.logo .crumb a.here{font-size:18px}}
 </style>
+<style id="v131-set">
+/* v131: 공통 지문과 나란히 보기 */
+.svr .svq{display:flex;align-items:baseline;gap:10px;margin:0 0 8px;font-size:14px}
+.svr .svq b{flex:none}.svr .svq span{flex:1;min-width:0;color:var(--text-sub);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.svr .qb{scroll-margin-top:80px}
+</style>
 <style id="v130-fav">
 /* v130: 즐겨찾기 */
 .row.fv .tx>b::before{content:"★ ";color:var(--brand)}
@@ -352,6 +358,8 @@ footer .guide details{border-color:var(--line)!important;background:none!importa
   <div class="pager" id="pager"></div>
   <p class="note">※ 출처: 각 대학이 입학처 누리집에 공개한 「대입전형 선행학습 영향평가 자체평가 보고서」의 문항카드(2025·2026학년도). 문항·제시문·해설의 저작권은 각 대학과 원저작자에게 있습니다. 문항 그림은 보고서를 그대로 잘라 실은 것이며, 비영리 교육 목적으로만 제공합니다. 인문·사회 계열 논술과 약술형(교과형) 국어 문항만 실었고, 수리·과학 논술과 면접 문항은 싣지 않았습니다. 제시문 소재·논제 유형은 이 사이트에서 붙인 것으로, 잘못된 곳은 ‘의견 보내기’로 알려 주세요.</p>
 </section></div></main>
+<div class="setv" id="setv" hidden role="dialog" aria-modal="true" aria-labelledby="svT"><div class="svbar"><div class="inner"><b id="svT"></b><small id="svS"></small><span class="sp"></span><button type="button" class="btn-line" id="svX">닫기 ✕</button></div></div>
+<div class="inner svcols"><div class="svl" id="svL"></div><div class="svr" id="svR"></div></div></div>
 <footer><div class="inner"><div><span class="old">국어의 모든 것</span><div style="margin-top:8px">국어 시험 기출 자료실 · 수록 문항의 저작권은 각 시험 시행 기관에 있습니다.</div><div style="margin-top:6px;opacity:.85">문제 출처 — 각 대학 대입전형 선행학습 영향평가 자체평가 보고서(입학처 누리집 공개 자료)</div></div>
 <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start"><a href="/suneung-korean/">처음 화면</a><a href="/suneung-korean/suneung.html">ᄉᆡ미 기픈 므른 · 수능</a><a href="/nonsul-korean/">내히 이러 · 논술</a><a href="/advanced-korean/">바ᄅᆞ래 가ᄂᆞ니 · 공무원·PSAT·LEET·임용</a><a href="https://docs.google.com/forms/d/e/1FAIpQLSdCkEn1SwTAvnc03M6mEtuhApm3kOqn1BMdI0A_H7iGOQREGg/viewform" target="_blank" rel="noopener">의견 보내기</a></div></div></footer>
 <script src="/suneung-korean/js/fav.js?v=130"></script>
@@ -417,7 +425,7 @@ function detail(i){
   return `<div class="det"><p class="meta"><b>${i.y}학년도 ${esc(i.unif)} ${esc(i.jeon)}</b>${i.gye?` · ${esc(i.gye)}`:''}${i.time?` · 예상 시간 ${esc(i.time)}`:''}</p>
     ${st?`<div class="sbox2"><p class="lab">공통 지문</p>${imgs(i.sid,'q',st.q,'공통 지문 원본')}</div><p class="lab" style="font-size:13px;font-weight:700;color:var(--text-faint);margin:10px 0 6px">문항</p>`:''}
     ${i.q?imgs(i.id,'q',i.q,`${i.y}학년도 ${i.unif} ${i.gye} 문항·제시문 원본`):'<p class="meta">문항 원본은 보고서에서 확인해 주세요.</p>'}
-    ${i.h?`<div class="acts"><button type="button" class="btn-line" data-hs="${esc(i.id)}">${S.hs[i.id]?'해설 접기 ↑':'출제 의도·채점 기준·예시 답안 보기 ↓'}</button>${KF?KF.btn('non',i.id,'즐겨찾기'):''}</div>${S.hs[i.id]?`<div class="hbox"><p class="lab">출제 의도 · 출제 근거 · 문항 해설 · 채점 기준 · 예시 답안</p>${imgs(i.id,'h',i.h,'해설 원본')}</div>`:''}`:(KF?`<div class="acts">${KF.btn('non',i.id,'즐겨찾기')}</div>`:'')}
+    ${i.h?`<div class="acts">${st?`<button type="button" class="btn-line" data-set="${esc(i.id)}">공통 지문과 나란히 보기 →</button>`:''}<button type="button" class="btn-line" data-hs="${esc(i.id)}">${S.hs[i.id]?'해설 접기 ↑':'출제 의도·채점 기준·예시 답안 보기 ↓'}</button>${KF?KF.btn('non',i.id,'즐겨찾기'):''}</div>${S.hs[i.id]?`<div class="hbox"><p class="lab">출제 의도 · 출제 근거 · 문항 해설 · 채점 기준 · 예시 답안</p>${imgs(i.id,'h',i.h,'해설 원본')}</div>`:''}`:`<div class="acts">${st?`<button type="button" class="btn-line" data-set="${esc(i.id)}">공통 지문과 나란히 보기 →</button>`:''}${KF?KF.btn('non',i.id,'즐겨찾기'):''}</div>`}
     <div class="tags"><button class="tag" data-q="${esc(i.topic.split(/[ —(,]/)[0])}">비슷한 소재 찾기</button><button class="tag" data-ft="uni" data-v="${esc(i.uni)}">${esc(i.uni)}만 보기</button>${(i.qtype||[]).slice(0,1).map(t=>`<button class="tag" data-ft="qtype" data-v="${esc(t)}">${esc(t)}만 보기</button>`).join('')}</div>
     <p class="srcl">출처: ${esc(i.unif)} ${i.y}학년도 대입전형 선행학습 영향평가 자체평가 보고서(문항카드) · ${esc(i.unif)}</p></div>`;
 }
@@ -438,8 +446,21 @@ function render(){
     p+=`<button type="button" data-p="${S.page+1}"${S.page===pages?' disabled':''} aria-label="다음 페이지">›</button>`; }
   $('pager').innerHTML=p;
 }
+/* v131: 공통 지문과 나란히 보기 — 왼쪽 공통 지문(붙박이), 오른쪽 그 지문에 딸린 문항들 */
+function openSet(id){ const i0=items.find(x=>x.id===id), st=i0&&i0.sid&&SETS[i0.sid]; if(!st) return;
+  const its=items.filter(x=>x.sid===i0.sid).sort((a,b)=>a.id<b.id?-1:1);
+  $('svT').textContent=`${i0.y}학년도 ${i0.unif} ${i0.jeon}`; $('svS').textContent=`공통 지문 · 문항 ${its.length}개`;
+  $('svL').innerHTML=imgs(i0.sid,'q',st.q,'공통 지문 원본');
+  $('svR').innerHTML=its.map(x=>`<div class="qb" id="sv-${esc(x.id)}"><p class="svq"><b>${esc(x.short||x.gye||'문항')}</b><span>${esc(x.topic)}</span>${KF?KF.btn('non',x.id,'즐겨찾기'):''}</p>${x.q?imgs(x.id,'q',x.q,'문항 원본'):''}</div>`).join('')+`<p class="srcl">출처: ${esc(i0.unif)} ${i0.y}학년도 대입전형 선행학습 영향평가 자체평가 보고서(문항카드) · ${esc(i0.unif)}</p>`;
+  $('setv').setAttribute('data-ink-host','set:'+i0.sid); $('setv').hidden=false; document.body.classList.add('noscroll'); $('setv').scrollTop=0;
+  const me=document.getElementById('sv-'+id); if(me&&its[0].id!==id) me.scrollIntoView({block:'start'});
+  $('svX').focus(); }
+function closeSet(){ $('setv').hidden=true; document.body.classList.remove('noscroll'); }
+$('svX').onclick=closeSet;
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!$('setv').hidden) closeSet(); });
 $('list').addEventListener('click',e=>{
   const bt=e.target.closest('button');
+  if(bt&&bt.dataset.set){ openSet(bt.dataset.set); return; }
   if(bt&&bt.dataset.hs){ S.hs[bt.dataset.hs]=!S.hs[bt.dataset.hs]; render(); return; }
   const tg=e.target.closest('.tag');
   if(tg){ FAV=false; if(tg.dataset.q){ S.q=tg.dataset.q; $('q').value=S.q; } else { S.sel={}; S.sel[tg.dataset.ft]=new Set([tg.dataset.v]); buildSide(); } S.page=1; S.open=null; render(); $('ixView').scrollIntoView({behavior:'smooth'}); return; }
